@@ -4,14 +4,14 @@ import 'package:expense_tracker/features/expense/presentation/widgets/new_expens
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ExpensePage extends StatefulWidget {
-  const ExpensePage({super.key});
+class ExpensesPage extends StatefulWidget {
+  const ExpensesPage({super.key});
 
   @override
-  State<ExpensePage> createState() => _ExpensePageState();
+  State<ExpensesPage> createState() => _ExpensesPageState();
 }
 
-class _ExpensePageState extends State<ExpensePage> {
+class _ExpensesPageState extends State<ExpensesPage> {
   final List<Expense> _expenses = [
     Expense(
       icon: FontAwesomeIcons.trainSubway,
@@ -50,15 +50,6 @@ class _ExpensePageState extends State<ExpensePage> {
     ),
   ];
 
-  void _openAddExpenseOverlay() {
-    showModalBottomSheet(
-      context: context,
-      builder: (ctx) {
-        return const NewExpense();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext contexts) {
     return Scaffold(
@@ -67,7 +58,13 @@ class _ExpensePageState extends State<ExpensePage> {
       ),
       body: ExpenseList(expenses: _expenses),
       floatingActionButton: FloatingActionButton(
-        onPressed: _openAddExpenseOverlay,
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const NewExpense(),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
