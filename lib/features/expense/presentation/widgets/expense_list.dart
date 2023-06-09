@@ -17,14 +17,21 @@ class ExpenseList extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (context, index) {
         return ListTile(
+          subtitle: Text(
+            '${expenses[index].date.day}/${expenses[index].date.month}/${expenses[index].date.year}',
+          ),
           title: Text(
             expenses[index].category.name.capitalize(),
           ),
-          subtitle: Text(
-            expenses[index].title.toString(),
-          ),
           leading: Icon(
             expenses[index].icon,
+          ),
+          trailing: Column(
+            children: [
+              Text(
+                '${expenses[index].amount.toString()} ${expenses[index].currency.name}',
+              ),
+            ],
           ),
         );
       },
