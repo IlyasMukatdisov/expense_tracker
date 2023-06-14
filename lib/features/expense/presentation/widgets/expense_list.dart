@@ -1,5 +1,6 @@
 import 'package:expense_tracker/core/utils/utils.dart';
 import 'package:expense_tracker/features/expense/domain/entity/expense.dart';
+import 'package:expense_tracker/features/expense/domain/entity/expense_category.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatelessWidget {
@@ -16,6 +17,8 @@ class ExpenseList extends StatelessWidget {
       shrinkWrap: true,
       itemCount: expenses.length,
       itemBuilder: (context, index) {
+        final category = expenseCategoryList.firstWhere((category) =>
+            category.icCodePoint == expenses[index].category.icCodePoint);
         return ListTile(
           subtitle: Text(
             '${expenses[index].date.day}/${expenses[index].date.month}/${expenses[index].date.year}',
@@ -24,7 +27,11 @@ class ExpenseList extends StatelessWidget {
             expenses[index].category.name.capitalize(),
           ),
           leading: Icon(
-            expenses[index].icon,
+            IconData(
+              category.icCodePoint,
+              fontFamily: category.icFontFamily,
+              fontPackage: category.icFontPackage,
+            ),
           ),
           trailing: Column(
             children: [

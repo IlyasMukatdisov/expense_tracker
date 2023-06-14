@@ -1,6 +1,7 @@
 import 'package:expense_tracker/core/utils/utils.dart';
 import 'package:expense_tracker/features/expense/data/expense_provider.dart';
 import 'package:expense_tracker/features/expense/domain/entity/expense.dart';
+import 'package:expense_tracker/features/expense/domain/entity/expense_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ class NewExpense extends ConsumerStatefulWidget {
 class _NewExpenseState extends ConsumerState<NewExpense> {
   final exchangeRate = 1 / 11400;
   late TextEditingController _amountController;
-    double? _dollarAmount = 0.0;
+  double? _dollarAmount = 0.0;
 
   Currency _currency = Currency.UZS;
   ExpenseCategory _selectedCategory = expenseCategoryList[0];
@@ -74,7 +75,6 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
 
     ref.read(expenseProvider.notifier).addExpense(
           Expense(
-            icon: _selectedCategory.icon,
             amount: amount,
             date: _selectedDate!,
             category: _selectedCategory,
